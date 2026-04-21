@@ -1,0 +1,195 @@
+[
+  {
+    "message_id": "M_001",
+    "suspect_id": "S_103",
+    "text": "The <b>package</b> will be delivered at <i>midnight</i> near point X. Use the rifle. Payment: $15000 on delivery.",
+    "date": "2026-05-12T14:30:00",
+    "tags": [
+      "weapons",
+      "urgent"
+    ]
+  },
+  {
+    "message_id": "M_002",
+    "suspect_id": "S_101",
+    "text": "Transfer the <br>money</br> to the account. Amount: $50000",
+    "date": "2026-05-12T15:45:00",
+    "tags": [
+      "finance"
+    ]
+  },
+  {
+    "message_id": "M_003",
+    "suspect_id": "S_109",
+    "text": "Meeting at the <u>border</u> tonight. Bring the documents and the scope. Budget approved: $8000.",
+    "date": "2026-05-12T16:10:00",
+    "tags": [
+      "ops",
+      "weapons"
+    ]
+  },
+  {
+    "message_id": "M_004",
+    "suspect_id": "S_105",
+    "text": "The <i>Ghost</i> is moving north. Do not engage until confirmed.",
+    "date": "2026-05-12T17:05:00",
+    "tags": [
+      "tracking"
+    ]
+  },
+  {
+    "message_id": "M_005",
+    "suspect_id": "S_102",
+    "text": "Coordinates: 32.123, 34.888. Package hidden in the <b>sand</b>. Value of contents: $120000.",
+    "date": "2026-05-12T18:20:00",
+    "tags": [
+      "ops",
+      "finance"
+    ]
+  },
+  {
+    "message_id": "M_006",
+    "suspect_id": "S_103",
+    "text": "Requesting <b>backup</b> for the rifle extraction. Status: Red. Allocated funds: $22000.",
+    "date": "2026-05-12T19:00:00",
+    "tags": [
+      "urgent",
+      "weapons"
+    ]
+  },
+  {
+    "message_id": "M_007",
+    "suspect_id": "S_111",
+    "text": "Funds <div>cleared</div>. Ready for the next phase. Total cleared: $75000.",
+    "date": "2026-05-12T20:15:00",
+    "tags": [
+      "finance",
+      "ops"
+    ]
+  },
+  {
+    "message_id": "M_008",
+    "suspect_id": "S_112",
+    "text": "Shipment arriving at <b>port</b>. Heavy security expected. Shipment value: $200000.",
+    "date": "2026-05-12T21:30:00",
+    "tags": [
+      "weapons",
+      "shipping"
+    ]
+  },
+  {
+    "message_id": "M_009",
+    "suspect_id": "S_113",
+    "text": "Encrypted <i>keys</i> generated. Deploy the malware now. Contract fee: $35000.",
+    "date": "2026-05-12T22:45:00",
+    "tags": [
+      "cyber",
+      "urgent"
+    ]
+  },
+  {
+    "message_id": "M_010",
+    "suspect_id": "S_115",
+    "text": "Target is <u>located</u>. Waiting for the final signal. Bounty: $60000.",
+    "date": "2026-05-12T23:59:00",
+    "tags": [
+      "ops"
+    ]
+  },
+  {
+    "message_id": "M_011",
+    "suspect_id": "S_123",
+    "text": "New rifle shipment <b>arrived</b> at the safehouse. Invoice: $45000.",
+    "date": "2026-05-13T08:00:00",
+    "tags": [
+      "weapons"
+    ]
+  },
+  {
+    "message_id": "M_012",
+    "suspect_id": "S_119",
+    "text": "Contact established. The <p>border</p> is weakly guarded. Bribe cost: $5000.",
+    "date": "2026-05-13T09:15:00",
+    "tags": [
+      "ops",
+      "tracking"
+    ]
+  },
+  {
+    "message_id": "M_013",
+    "suspect_id": "S_102",
+    "text": "Transfer another <b>$20000</b> for the logistics team.",
+    "date": "2026-05-13T10:30:00",
+    "tags": [
+      "finance"
+    ]
+  },
+  {
+    "message_id": "M_014",
+    "suspect_id": "S_121",
+    "text": "Waiting for the <i>package</i> at the warehouse. Handling fee: $3000.",
+    "date": "2026-05-13T11:45:00",
+    "tags": [
+      "shipping"
+    ]
+  },
+  {
+    "message_id": "M_015",
+    "suspect_id": "S_103",
+    "text": "Rifle zeroed. Ready for the <u>operation</u>. Final payment due: $18000.",
+    "date": "2026-05-13T13:00:00",
+    "tags": [
+      "weapons",
+      "ops"
+    ]
+  },
+  {
+    "message_id": "M_016",
+    "suspect_id": "S_112",
+    "text": "Security at the <b>border</b> increased. Delayed by 24h. Additional costs: $12000.",
+    "date": "2026-05-13T14:20:00",
+    "tags": [
+      "urgent",
+      "ops"
+    ]
+  },
+  {
+    "message_id": "M_017",
+    "suspect_id": "S_109",
+    "text": "The <i>scope</i> is missing from the crate. Check again. Replacement cost: $4500.",
+    "date": "2026-05-13T15:40:00",
+    "tags": [
+      "weapons",
+      "test"
+    ]
+  },
+  {
+    "message_id": "M_018",
+    "suspect_id": "S_105",
+    "text": "Ghost confirmed at <u>midnight</u>. Engaging tracking. Surveillance budget: $9000.",
+    "date": "2026-05-13T17:00:00",
+    "tags": [
+      "tracking",
+      "ops"
+    ]
+  },
+  {
+    "message_id": "M_019",
+    "suspect_id": "S_106",
+    "text": "Proceed to the <b>port</b>. Bring the money. Total amount: $30000.",
+    "date": "2026-05-13T18:20:00",
+    "tags": [
+      "finance",
+      "shipping"
+    ]
+  },
+  {
+    "message_id": "M_020",
+    "suspect_id": "S_123",
+    "text": "Operational <i>success</i>. Returning to base. Bonus payment: $25000.",
+    "date": "2026-05-13T20:00:00",
+    "tags": [
+      "ops"
+    ]
+  }
+]

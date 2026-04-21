@@ -1,0 +1,19 @@
+suspect_id,full_name,bank_account,nationality,initial_risk,last_known_location
+S_101,Ahmad Al-Fayed,IL-99-123-456789,Syrian,3,Gaza
+S_102,Ivan Volkov,CY-12-888-000111,Russian,5,Lebanon
+S_103,Fatima Rahmani,IR-00-555-444333,Iranian,8,Tehran
+S_104,Unknown_Entity_A,,Unknown,2,Syria
+S_105,"John ""The Ghost"" Smith",US-11-222-333444,American,7,Cyprus
+S_106,Mohammed Rezi,QA-44-111-222333,Qatari,6,Jordan
+S_107,Chen Wei,CN-88-999-777666,Chinese,4,Unknown
+S_108,Elena Rodriguez,ES-33-444-555666,Spanish,5,Lebanon
+S_109,Yussuf Mansour,EG-22-333-444555,Egyptian,9,Sinai
+S_110,Agent_X_Redacted,,Unknown,1,Gaza
+S_111,Omar Al-Bashir,SD-55-666-777888,Sudanese,7,Sudan
+S_112,Ali Mansoor,YE-11-222-333444,Yemeni,8,Sana'a
+S_113,Dmitry Sokolov,RU-99-000-111222,Russian,6,Moscow
+S_114,Li Na,CN-77-888-999000,Chinese,3,Beijing
+S_115,Saif Al-Islam,LY-44-333-222111,Libyan,9,Tripoli
+S_119,Karim Al-Nasser,JO-66-444-555666,Jordanian,6,Amman
+S_121,Tariq Osman,TR-33-777-888999,Turkish,5,Istanbul
+S_123,Nadia Petrov,UA-77-111-222333,Ukrainian,7,Odessa

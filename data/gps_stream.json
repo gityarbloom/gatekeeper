@@ -1,0 +1,152 @@
+[
+  {
+    "vehicle_id": "V_ALPHA",
+    "lat": 32.0853,
+    "lon": 34.7818,
+    "timestamp": "2026-05-12T16:00:01"
+  },
+  {
+    "vehicle_id": "V_BRAVO",
+    "lat": 31.7683,
+    "lon": 35.2137,
+    "timestamp": "2026-05-12T16:00:05"
+  },
+  {
+    "vehicle_id": "V_ALPHA",
+    "lat": 32.095,
+    "lon": 34.79,
+    "timestamp": "2026-05-12T16:05:01"
+  },
+  {
+    "vehicle_id": "V_GAMMA",
+    "lat": 33.2345,
+    "lon": 35.5678,
+    "timestamp": "2026-05-12T16:10:22"
+  },
+  {
+    "vehicle_id": "V_BRAVO",
+    "lat": 31.77,
+    "lon": 35.22,
+    "timestamp": "2026-05-12T16:15:45"
+  },
+  {
+    "vehicle_id": "V_DELTA",
+    "lat": 29.5581,
+    "lon": 34.9482,
+    "timestamp": "2026-05-12T16:20:00"
+  },
+  {
+    "vehicle_id": "V_GAMMA",
+    "lat": 33.24,
+    "lon": 35.57,
+    "timestamp": "2026-05-12T16:25:30"
+  },
+  {
+    "vehicle_id": "V_ALPHA",
+    "lat": 32.1,
+    "lon": 34.8,
+    "timestamp": "2026-05-12T16:30:10"
+  },
+  {
+    "vehicle_id": "V_EPSILON",
+    "lat": 32.4567,
+    "lon": 34.8901,
+    "timestamp": "2026-05-12T16:35:00"
+  },
+  {
+    "vehicle_id": "V_BRAVO",
+    "lat": 31.78,
+    "lon": 35.23,
+    "timestamp": "2026-05-12T16:40:15"
+  },
+  {
+    "vehicle_id": "V_ALPHA",
+    "lat": 32.11,
+    "lon": 34.81,
+    "timestamp": "2026-05-12T16:45:20"
+  },
+  {
+    "vehicle_id": "V_GAMMA",
+    "lat": 33.25,
+    "lon": 35.58,
+    "timestamp": "2026-05-12T16:50:30"
+  },
+  {
+    "vehicle_id": "V_DELTA",
+    "lat": 29.56,
+    "lon": 34.95,
+    "timestamp": "2026-05-12T16:55:40"
+  },
+  {
+    "vehicle_id": "V_ZETA",
+    "lat": 32.79,
+    "lon": 34.98,
+    "timestamp": "2026-05-12T17:00:00"
+  },
+  {
+    "vehicle_id": "V_ALPHA",
+    "lat": 32.12,
+    "lon": 34.82,
+    "timestamp": "2026-05-12T17:05:10"
+  },
+  {
+    "vehicle_id": "V_BRAVO",
+    "lat": 31.79,
+    "lon": 35.24,
+    "timestamp": "2026-05-12T17:10:20"
+  },
+  {
+    "vehicle_id": "V_GAMMA",
+    "lat": 33.26,
+    "lon": 35.59,
+    "timestamp": "2026-05-12T17:15:30"
+  },
+  {
+    "vehicle_id": "V_DELTA",
+    "lat": 29.57,
+    "lon": 34.96,
+    "timestamp": "2026-05-12T17:20:40"
+  },
+  {
+    "vehicle_id": "V_ALPHA",
+    "lat": 32.13,
+    "lon": 34.83,
+    "timestamp": "2026-05-12T17:25:50"
+  },
+  {
+    "vehicle_id": "V_ZETA",
+    "lat": 32.8,
+    "lon": 34.99,
+    "timestamp": "2026-05-12T17:30:00"
+  },
+  {
+    "vehicle_id": "V_EPSILON",
+    "lat": 32.46,
+    "lon": 34.9,
+    "timestamp": "2026-05-12T17:35:00"
+  },
+  {
+    "vehicle_id": "V_BRAVO",
+    "lat": 31.8,
+    "lon": 35.25,
+    "timestamp": "2026-05-12T17:40:00"
+  },
+  {
+    "vehicle_id": "V_ALPHA",
+    "lat": 32.14,
+    "lon": 34.84,
+    "timestamp": "2026-05-12T17:45:00"
+  },
+  {
+    "vehicle_id": "V_GAMMA",
+    "lat": 33.27,
+    "lon": 35.6,
+    "timestamp": "2026-05-12T17:50:00"
+  },
+  {
+    "vehicle_id": "V_DELTA",
+    "lat": 29.58,
+    "lon": 34.97,
+    "timestamp": "2026-05-12T17:55:00"
+  }
+]
