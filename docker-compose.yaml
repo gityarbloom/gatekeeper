@@ -42,7 +42,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: app_user
       MYSQL_PASSWORD: israelyarbloom
-      # MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -77,6 +76,17 @@ services:
       mysql:
         condition: service_healthy
 
+
+  data_analyzer:
+    environment:
+      CONSUM_CONFIG: kafka:9092
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: identities
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: israelyarbloom
+
+
+      
 volumes:
   kafka_kraft:
   mysql_data:

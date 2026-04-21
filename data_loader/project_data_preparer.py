@@ -30,7 +30,7 @@ class DataPreparer:
 
 
     def create_accounts_financial_df(self):
-        accounts_financial = self.df[["suspect_id", "bank_account"]].copy()
+        accounts_financial = self.df[["suspect_id", "bank_account", "initial_risk"]].copy()
         accounts_financial["credit_rating_factor"] = pd.cut(
             self.df["initial_risk"],
             bins=[0, 3, 6, 8, 10],
