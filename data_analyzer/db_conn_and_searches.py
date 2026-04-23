@@ -1,0 +1,22 @@
+import pymysql
+import time
+
+
+
+class MySqlConnection:
+    def __init__(self, password, host, db_name, user):
+        self.conn = self.init_db_connection(password, host, db_name, user)
+
+
+    def init_db_connection(self, password, host, db_name, user):
+        for retry in range(5):
+            try:
+                time.sleep(1)
+                print("\nTry to connect to MySql⏳...")
+                conn = pymysql.connect(password=password, host=host, user=user, database=db_name)
+                print(f"\n👍 Cnnected!")
+                return conn
+            except Exception as e:
+                print(f"\n👎 Attempt {retry+1} failed: {e}")
+                if retry == 4:
+                    raise

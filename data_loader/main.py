@@ -1,5 +1,5 @@
 from data_preparer import DataPreparer
-from loader_config import ProjectConfig
+from loader_config import LoaderConfig
 from kafka_loader import KafkaProducer
 from mysql_loader import MySqlLoader
 import time
@@ -9,7 +9,7 @@ import time
 def run():
     print("\n\n🌞 --The DATA-LOADER start his action-- 🌞\n\n")
 
-    config = ProjectConfig()
+    config = LoaderConfig()
     data = DataPreparer(*config.files_path)
     prod = KafkaProducer(config.prod_config)
 
@@ -18,7 +18,7 @@ def run():
         prod.push_batch("Gate_Keeper", data.loading_json(j_path), 5)
 
     mysql_loader = MySqlLoader(**config.db_config)
-    table_names = mysql_loader.create_tables()
+    table_names = mysql_loader.table_names
     suspects = data.create_suspects_df()
     accounts_financial = data.create_accounts_financial_df()
     df_tables = [suspects, accounts_financial]
