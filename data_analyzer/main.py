@@ -1,4 +1,4 @@
-from db_conn_and_searches import MySqlConnection
+from mysql_analyzer import MySqlConnection
 from kafka_consumer import KafkaConsumer
 from processing_and_analysis import *
 import os
@@ -55,3 +55,12 @@ ex = {
       "urgent"
     ]
   }
+
+
+
+
+
+
+
+
+# os.getenv("MONGO_URI", "mongodb://localhost:27017/")
