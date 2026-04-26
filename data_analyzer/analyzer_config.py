@@ -2,7 +2,7 @@ import os
 
 
 
-class Configurations:
+class AnalyzerConfig:
     def __init__(self):
         self.mysql = {
             "password": os.getenv("MYSQL_PASSWORD"),
