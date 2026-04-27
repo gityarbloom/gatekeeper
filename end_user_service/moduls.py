@@ -97,16 +97,17 @@ class ElasticSearchClient:
                 "multi_match": {
                     "query": query,
                     "fields": [
-                        "tags^5",
-                        "title^2",
-                        "description"
+                        "message_id",
+                        "suspect_id",
+                        "text",
+                        "tags^5"
                     ]
                 }
             },
             "size": size
         }
-
         return self.es.search(index=self.index_name, body=body)
+
 
     def delete_doc(self, doc_id:str):
         return self.es.delete(index=self.index_name, id=doc_id)
