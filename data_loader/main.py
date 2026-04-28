@@ -1,3 +1,4 @@
+from logs_producer import LogsProducer
 from data_preparer import DataPreparer
 from loader_config import LoaderConfig
 from kafka_loader import KafkaProducer
@@ -7,9 +8,10 @@ import time
 
 
 def run():
-    print("\n\n🌞 --The DATA-LOADER start his action-- 🌞\n\n")
-
     config = LoaderConfig()
+    logger = LogsProducer(config.prod_config)
+    logger.publish_log("🌞 --The DATA-LOADER start his action-- 🌞")
+
     data = DataPreparer(*config.files_path)
     prod = KafkaProducer(config.prod_config)
 
@@ -26,7 +28,7 @@ def run():
     for i in range(len(df_tables)):
         mysql_loader.load_df_to_table(df_tables[i], table_names[i])
     time.sleep(60)
-    print("\n\n🥱 --The DATA-LOADER finish his action-- 🥱\n\n")
+    logger.publish_log("*****🥱 --The DATA-LOADER finish his action-- 🥱*****")
 
 
 if __name__ == "__main__":
