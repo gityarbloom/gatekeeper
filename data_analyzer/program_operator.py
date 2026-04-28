@@ -1,3 +1,5 @@
+from analyzer_config import AnalyzerConfig
+from logs_producer import LogsProducer
 from mongo_loader import MongoLoader
 from mysql_analyzer import MySqlConnection
 from kafka_consumer import KafkaConsumer
@@ -5,21 +7,24 @@ from processing_and_analysis import *
 
 
 
-def play(config):
-    print("\n\n🌞 --The DATA-ANALYZERR start his action-- 🌞\n\n")
+def play():
+    config = AnalyzerConfig()
+    logger = LogsProducer(config.prod)
+
+    logger.publish_log("🌞 --The 'DATA-ANALYZERR' start his action-- 🌞")
 
     editor = TextEditor()
-    consumer = KafkaConsumer(config.kafka, "Gate_Keeper")
-    sql_db = MySqlConnection(**config.mysql)
-    mongo_db = MongoLoader(config.mongo)
+    consumer = KafkaConsumer(logger, config.consum, "gate_keeper")
+    sql_db = MySqlConnection(logger **config.mysql)
+    mongo_db = MongoLoader(logger, config.mongo)
     counter = 0
 
     for msg in consumer.consum():
         if not len(msg) == 5:
             continue
         counter +=1
-        print(f"\nReceived message: {msg}")
-        print(f"\n***{counter}***")
+        logger.publish_log(f"Received message: {msg}")
+        logger.publish_log(f"***{counter}***")
         msg["text"] = editor.clean_html(msg["text"])
         msg["current_transaction_value"] = editor.price_extraction(msg["text"])
         risks = sql_db.get_risks(msg["suspect_id"])

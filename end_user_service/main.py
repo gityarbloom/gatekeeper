@@ -1,4 +1,3 @@
-# from elastic_loader import play_program
 from fastapi import FastAPI
 from routes import router
 import uvicorn

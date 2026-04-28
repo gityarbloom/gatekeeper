@@ -94,7 +94,7 @@ services:
     ports:
       - "9900:9900"
     environment:
-      PROD_CONFIG: kafka:9092
+      KAFKA_URI: kafka:9092
       GPS_PATH: ./data/gps_stream.json
       INTERCEPTS_PATH: ./data/intercepts.json
       IDENTITIES_PATH: ./data/identities.csv
@@ -119,7 +119,7 @@ services:
     ports: 
       - 8200:8200
     environment:
-      CONSUM_CONFIG: kafka:9092
+      KAFKA_URI: kafka:9092
       MYSQL_HOST: mysql
       MYSQL_DATABASE: identities
       MYSQL_USER: app_user
@@ -131,14 +131,26 @@ services:
 
 
 
-  # end_user_svc:
-  #   build: end_user_service/
-  #   ports:
-  #     - "9990:9990"
-  #   environment:
-  #     ELS_URI: "http://elasticsearch:9200"
-  #   depends_on:
-  #     - elasticsearch
+  end_user_svc:
+    build: end_user_service/
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URI: mongodb://admin:israelyarbloom@mongo:27017/?authSource=admin
+      ELS_URI: "http://elasticsearch:9200"
+    depends_on:
+      - elasticsearch
+
+
+  logger:
+    build: logger/
+    environment:
+      KAFKA_URI: kafka:9092
+    depends_on:
+      - data_loader
+      - data_analyzer
+      - end_user_service
+
 
 volumes:
   kafka_kraft:

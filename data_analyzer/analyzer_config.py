@@ -10,9 +10,9 @@ class AnalyzerConfig:
             "db_name": os.getenv("MYSQL_DATABASE"),
             "user": os.getenv("MYSQL_USER")
         }
-        self.kafka = {
-            'bootstrap.servers': os.getenv("CONSUM_CONFIG"),
-            'group.id': 'gatekeeper',
+        self.consum = {
+            'bootstrap.servers': os.getenv("KAFKA_URI"),
             'auto.offset.reset': 'earliest'
             }
+        self.prod = {'bootstrap.servers': os.getenv("KAFKA_URI")}
         self.mongo = os.getenv("MONGO_URI", "mongodb://localhost:27017/")

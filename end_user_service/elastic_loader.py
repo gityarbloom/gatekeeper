@@ -6,6 +6,7 @@ import os
 
 
 class ElasticLoader:
+    time.sleep(60)
     _program_running = None
     _initialized = False
 
@@ -19,7 +20,7 @@ class ElasticLoader:
         if self.__class__._initialized:
             return
         self.mongo = MongoLoader(os.getenv("MONGO_URI", "mongodb://admin:israelyarbloom@localhost:27017/?authSource=admin"))
-        self.es = ElasticSearchClient("http://localhost:9200", "gate_keeper", mapping=self.get_map())
+        self.es = ElasticSearchClient(os.getenv("ELS_URI", "http://localhost:9200"), "gate_keeper", mapping=self.get_map())
         self.play_program()
 
 
@@ -60,7 +61,7 @@ class ElasticLoader:
             es_doc = self.transform(doc)
             response = self.es.index_doc(es_doc["message_id"], es_doc)
             print("\n🆕 ES index 'gate_keeper' is receive a new document.")
-            print(f"Document-status in ES: \n'{response["result"]}'\n"+"*"*75+"\n")
+            print(f"Document-status in ES: \n'{response['result']}'\n"+"*"*75+"\n")
             time.sleep(1)
 
         time.sleep(5)

@@ -4,7 +4,8 @@ import time
 
 
 class MySqlConnection:
-    def __init__(self, password, host, db_name, user):
+    def __init__(self, logger, password, host, db_name, user):
+        self.logger = logger
         self.conn = self.init_db_connection(password, host, db_name, user)
 
 
@@ -12,12 +13,12 @@ class MySqlConnection:
         for retry in range(5):
             try:
                 time.sleep(2)
-                print("\nTry to connect to MySql⏳...")
+                self.logger.produc("Try to connect to 'MySql'⏳...")
                 conn = pymysql.connect(password=password, host=host, user=user, database=db_name)
-                print(f"\n👍 Cnnected!")
+                self.logger.produc("👍 Cnnected to 'MySql'!")
                 return conn
             except Exception as e:
-                print(f"\n👎 Attempt {retry+1} failed: {e}")
+                self.logger.produc(f"👎 mysql-connection-attempt number {retry+1} failed: {e}")
                 if retry == 4:
                     raise
     
