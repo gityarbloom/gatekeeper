@@ -9,7 +9,7 @@ class KafkaProducer:
             print("try to connect to kafka⏳...")
             try:
                 self.prod = Producer(config)
-                self.prod.list_topics(topic="Gate_Keeper", timeout=1)
+                self.prod.list_topics(topic="gate_keeper", timeout=1)
                 self.prod.flush(2)
                 print("\n👍 connected to kafka!")
                 break

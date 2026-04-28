@@ -15,7 +15,7 @@ def play():
 
     editor = TextEditor()
     consumer = KafkaConsumer(logger, config.consum, "gate_keeper")
-    sql_db = MySqlConnection(logger **config.mysql)
+    sql_db = MySqlConnection(logger, **config.mysql)
     mongo_db = MongoLoader(logger, config.mongo)
     counter = 0
 

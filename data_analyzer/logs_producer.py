@@ -8,7 +8,7 @@ import json
 class LogsProducer:
 
     def __init__(self, prod_config):
-        self.c_name = f"{Path(__file__).parent.name}: ".upper()
+        self.c_name = f"\n###'{Path(__file__).parent.name}'###: ".upper() + "\n"
         self.config = prod_config
         self.prod = self.get_producer()
 
@@ -19,6 +19,8 @@ class LogsProducer:
             try:
                 print("\nTry to connect to 'kafka'⏳...")
                 prod = Producer(self.config)
+                prod.list_topics(topic = "the_gate_keeper_logs", timeout=1)
+                prod.flush(2)
                 print("\n👍 Connected to 'kafka'!")
                 return prod
             except Exception as e:
@@ -29,8 +31,10 @@ class LogsProducer:
                 
 
     def publish_log(self, log):
-        info_log = f"\n\n{self.c_name} :\n"
+        info_log = f"\n\n{self.c_name} :\n{log}"
         try:
-            self.prod.produce(topic="the-'gate_keeper'-logs", value=json.dumps(info_log).encode("utf-8"))
+            
+            self.prod.produce(topic="the_gate_keeper_logs", value=json.dumps(info_log).encode("utf-8"))
+            self.prod.flush(2)
         except Exception:
             raise

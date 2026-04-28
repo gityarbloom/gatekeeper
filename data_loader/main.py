@@ -15,7 +15,7 @@ def run():
 
 
     for j_path in config.files_path[:2]:
-        prod.push_batch("Gate_Keeper", data.loading_json(j_path), 5)
+        prod.push_batch("gate_keeper", data.loading_json(j_path), 5)
 
     mysql_loader = MySqlLoader(**config.db_config)
     table_names = mysql_loader.table_names

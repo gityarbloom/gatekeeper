@@ -33,7 +33,7 @@ class  KafkaConsumer:
         self.logger.publish_log("Waiting for messages from 'Kafka'...")
         try:
             while True:
-                msg = self.consumer.poll(2)
+                msg = self.consumer.poll(1)
                 if msg is None:
                     continue
                 if msg.error():

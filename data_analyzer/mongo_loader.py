@@ -41,6 +41,6 @@ class MongoLoader:
         self.logger.publish_log("Insert one doc to MongoDB")
         try:
             result = loader.insert_one(docs[0])
-            self.logger.publish_log("Inserted id:", result.inserted_id)
+            self.logger.publish_log(f"Inserted id: \n{result.inserted_id}")
         except PyMongoError as e:
             self.logger.publish_log(f"'MongoDB' error: \n{e}")

@@ -12,6 +12,7 @@ class AnalyzerConfig:
         }
         self.consum = {
             'bootstrap.servers': os.getenv("KAFKA_URI"),
+            'group.id': 'gatekeeper',
             'auto.offset.reset': 'earliest'
             }
         self.prod = {'bootstrap.servers': os.getenv("KAFKA_URI")}

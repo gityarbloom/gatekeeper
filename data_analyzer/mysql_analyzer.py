@@ -13,12 +13,12 @@ class MySqlConnection:
         for retry in range(5):
             try:
                 time.sleep(2)
-                self.logger.produc("Try to connect to 'MySql'⏳...")
+                self.logger.publish_log("Try to connect to 'MySql'⏳...")
                 conn = pymysql.connect(password=password, host=host, user=user, database=db_name)
-                self.logger.produc("👍 Cnnected to 'MySql'!")
+                self.logger.publish_log("👍 Cnnected to 'MySql'!")
                 return conn
             except Exception as e:
-                self.logger.produc(f"👎 mysql-connection-attempt number {retry+1} failed: {e}")
+                self.logger.publish_log(f"👎 mysql-connection-attempt number {retry+1} failed: {e}")
                 if retry == 4:
                     raise
     
