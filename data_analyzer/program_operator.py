@@ -11,7 +11,7 @@ def play():
     config = AnalyzerConfig()
     logger = LogsProducer(config.prod)
 
-    logger.publish_log("🌞 --The 'DATA-ANALYZERR' start his action-- 🌞")
+    logger.publish_info_log("🌞 --The 'DATA-ANALYZERR' start his action-- 🌞")
 
     editor = TextEditor()
     consumer = KafkaConsumer(logger, config.consum, "gate_keeper")
@@ -23,8 +23,7 @@ def play():
         if not len(msg) == 5:
             continue
         counter +=1
-        logger.publish_log(f"Received message: {msg}")
-        logger.publish_log(f"***{counter}***")
+        logger.publish_info_log(f"A new message \n**number {counter}**\n is recived from 'Kafka'! \nMsg_ID: {msg['message_id']}")
         msg["text"] = editor.clean_html(msg["text"])
         msg["current_transaction_value"] = editor.price_extraction(msg["text"])
         risks = sql_db.get_risks(msg["suspect_id"])
@@ -36,4 +35,4 @@ def play():
         msg["initial_risk"] = initial_risk
         msg["credit_rating_factor"] = credit_rating_factor
         msg["final_score"] = final_score
-        mongo_db.insert("gatekeeper_db", "gatekeeper_coll", [msg])
+        mongo_db.insert(counter, "gatekeeper_db", "gatekeeper_coll", msg)

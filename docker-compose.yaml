@@ -136,6 +136,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      KAFKA_URI: kafka:9092
       MONGO_URI: mongodb://admin:israelyarbloom@mongo:27017/?authSource=admin
       ELS_URI: "http://elasticsearch:9200"
     depends_on:

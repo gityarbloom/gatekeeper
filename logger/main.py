@@ -13,6 +13,6 @@ config = {
 
 
 if __name__ == "__main__":
-    time.sleep(15)
+    time.sleep(5)
     cons = LoggerPrinter(config)
     cons.consum_and_print_logs()

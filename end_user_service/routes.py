@@ -1,9 +1,15 @@
 from elastic_loader import ElasticLoader
+from logs_producer import LogsProducer
 from fastapi import APIRouter
+import os
+
+
+prod_config = {"bootstrap.servers": os.getenv("KAFKA_URI", "localhost:9092")}
+logger = LogsProducer(prod_config)
 
 
 
-es_loader = ElasticLoader()
+es_loader = ElasticLoader(logger)
 router = APIRouter()
 
 

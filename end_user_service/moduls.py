@@ -6,45 +6,45 @@ import time
 
 
 class MongoLoader:
-    def __init__(self, mongo_uri:str):
-        self.client_conn = self.get_mongodb_client(mongo_uri)
+    def __init__(self, logger, mongo_uri:str):
+        self.logger = logger
+        self.mongo_uri = mongo_uri
+        self.client_conn = self.get_mongodb_client()
 
 
-    def get_mongodb_client(self, mongo_uri):
+    def get_mongodb_client(self):
         for retry in range(5):
             try:
                 time.sleep(2)
-                print("\nTry to connect to MongoDB⏳...")
-                client_conn = MongoClient(mongo_uri, serverSelectionTimeoutMS=2000)
+                self.logger.publish_info_log("Try to connect to 'MongoDB'⏳...")
+                client_conn = MongoClient(self.mongo_uri, serverSelectionTimeoutMS=2000)
                 client_conn.admin.command("ping")
-                print(f"\n👍 Cnnected!")
+                self.logger.publish_info_log("👍 Cnnected to 'MongoDB'!")
                 return client_conn
             except Exception as e:
-                print(f"\n👎 Attempt {retry+1} failed: {e}")
+                self.logger.publish_err_log(f"👎 'MongoDB'-connection-attempt number {retry+1} failed: \n{e}")
                 if retry == 4:
                     raise
 
     
-    def insert(self, db:str, coll:str, docs:list[dict]):
+    def insert(self, doc_num, db:str, coll:str, docs:list[dict]):
         loader = self.client_conn[db][coll]
         if len(docs) > 1:
-            print(f"\n\nInsert A batch of documents to MongoDB")
+            self.logger.publish_info_log("Insert A batch of documents to MongoDB")
             try:
                 result = loader.insert_many(documents=docs)
-                print(f"\nInserted {len(result.inserted_ids)} docs\n")
+                self.logger.publish_info_log(f"Inserted {len(result.inserted_ids)} docs to 'MongoDB'")
             except BulkWriteError as e:
-                print("\nBulk write error:\n")
-                for err in e.details.get("\nwriteErrors", []):
-                    print(f"\nFailed at index {err['index']}: {err['errmsg']}\n")
-
-        print(f"\n\nInsert one doc to MongoDB")
+                self.logger.publish_err_log(f"Bulk write 'MongoDB' error:\n{e}")
+                for err in e.details.get("writeErrors", []):
+                    self.logger.publish_err_log(f"Insert to 'MongoDB' Failed at index {err['index']}: {err['errmsg']}")
         try:
             result = loader.insert_one(docs[0])
-            print("\nInserted id:", result.inserted_id)
+            self.logger.publish_info_log(f"Insert doc number {doc_num} to 'MongoDB'\nInserted id: {result.inserted_id}")
         except PyMongoError as e:
-            print("\nMongo error:", e)
-
-
+            self.logger.publish_err_log(f"'MongoDB' error: \n{e}")
+            
+            
     def get_all_docs(self, db:str, coll:str):
         for doc in self.client_conn[db][coll].find():
             yield doc
@@ -56,7 +56,8 @@ class MongoLoader:
 
 
 class ElasticSearchClient:
-    def __init__(self, host:str, index_name:str, mapping:dict):
+    def __init__(self, logger, host:str, index_name:str, mapping:dict):
+        self.logger = logger
         self.es_host = host
         self.index_name = index_name
         self.mapping = mapping
@@ -67,14 +68,14 @@ class ElasticSearchClient:
         for retry in range(5):
             try:
                 time.sleep(2)
-                print("\nTry to connect to ElasticSearch⏳...")
+                self.logger.publish_info_log("Try to connect to ElasticSearch⏳...")
                 es = Elasticsearch(self.es_host)
                 response = es.indices.create(index=self.index_name, body=self.mapping)
-                print(f"\n👍 ElasticSearch is cnnected!")
-                print(f"\n\n👍 Index {self.index_name} Created!\n{response}\n")
+                self.logger.publish_info_log(f"👍 ElasticSearch is cnnected!")
+                self.logger.publish_info_log(f"👍 Index {self.index_name} Created!\n{response}")
                 return es
             except Exception as e:
-                print(f"\n👎 Attempt {retry+1} failed: {e}\n")
+                self.logger.publish_err_log(f"👎 Attempt {retry+1} failed: {e}")
                 if retry == 4:
                     raise
 

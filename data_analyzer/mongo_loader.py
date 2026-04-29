@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from pymongo.errors import BulkWriteError, PyMongoError
+from bson import ObjectId
 import time
 
 
@@ -14,33 +15,26 @@ class MongoLoader:
         for retry in range(5):
             try:
                 time.sleep(2)
-                self.logger.publish_log("Try to connect to 'MongoDB'⏳...")
+                self.logger.publish_info_log("Try to connect to 'MongoDB'⏳...")
                 client_conn = MongoClient(self.mongo_uri, serverSelectionTimeoutMS=2000)
                 client_conn.admin.command("ping")
-                self.logger.publish_log("👍 Cnnected to 'MongoDB'!")
+                self.logger.publish_info_log("👍 Cnnected to 'MongoDB'!")
                 return client_conn
             except Exception as e:
-                self.logger.publish_log(f"👎 'MongoDB'-connection-attempt number {retry+1} failed: {e}")
+                self.logger.publish_err_log(f"👎 'MongoDB'-connection-attempt number {retry+1} failed: {e}")
                 if retry == 4:
                     raise
 
 
     
-    def insert(self, db:str, coll:str, docs:list[dict]):
+    def insert(self, doc_num, db:str, coll:str, doc:dict):
         loader = self.client_conn[db][coll]
-        if len(docs) > 1:
-            self.logger.publish_log("Insert A batch of documents to MongoDB")
-            try:
-                result = loader.insert_many(documents=docs)
-                self.logger.publish_log(f"Inserted {len(result.inserted_ids)} docs to 'MongoDB'\n")
-            except BulkWriteError as e:
-                self.logger.publish_log("Bulk write 'MongoDB' error:\n")
-                for err in e.details.get("writeErrors", []):
-                    self.logger.publish_log(f"Insert to 'MongoDB' Failed at index {err['index']}: {err['errmsg']}\n")
-
-        self.logger.publish_log("Insert one doc to MongoDB")
         try:
-            result = loader.insert_one(docs[0])
-            self.logger.publish_log(f"Inserted id: \n{result.inserted_id}")
+            result = loader.update_one(
+                {"suspect_id": doc["suspect_id"]},
+                {"$setOnInsert": doc}
+                ,upsert=True
+                )
+            self.logger.publish_info_log(f"Insert doc \n**Number {doc_num}** \nto MongoDB\nInserted id: {result.upserted_id}")
         except PyMongoError as e:
-            self.logger.publish_log(f"'MongoDB' error: \n{e}")
+            self.logger.publish_err_log(f"'MongoDB' error: \n{e}")

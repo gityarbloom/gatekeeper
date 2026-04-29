@@ -4,17 +4,18 @@ import json
 
 
 class KafkaProducer:
-    def __init__(self, config):
+    def __init__(self, logger, config):
+        self.logger = logger
         for retry in range(5):
-            print("try to connect to kafka⏳...")
+            self.logger.publish_info_log("try to connect to kafka⏳...")
             try:
                 self.prod = Producer(config)
                 self.prod.list_topics(topic="gate_keeper", timeout=1)
                 self.prod.flush(2)
-                print("\n👍 connected to kafka!")
+                self.logger.publish_info_log("👍 connected to kafka!")
                 break
             except Exception as e:
-                print(f"👎 kafka-connection failed: {e}")
+                self.logger.publish_err_log(f"👎 kafka-connection failed: {e}")
                 if retry == 4:
                     raise
 
@@ -37,6 +38,6 @@ class KafkaProducer:
 
     def sending_report(self, err, msg):
         if err:
-            print(f"\n👎 Delivery failed: {err}")
+            self.logger.publish_err_log(f"👎 Delivery failed: {err}")
         else:
-            print(f"\n👍 Delivered {msg.value().decode('utf-8')} \nto {msg.topic()}")
+            self.logger.publish_info_log(f"👍 Delivered {msg.value().decode('utf-8')} \nto {msg.topic()}")

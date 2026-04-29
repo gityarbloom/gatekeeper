@@ -5,22 +5,24 @@ import os
 
 
 
+
 class ElasticLoader:
     time.sleep(60)
     _program_running = None
     _initialized = False
 
-    def __new__(cls):
+    def __new__(cls, *args, **kwargs):
         if cls._program_running is None:
             cls._program_running = super().__new__(cls)
         return cls._program_running
 
 
-    def __init__(self):
+    def __init__(self, logger):
         if self.__class__._initialized:
             return
-        self.mongo = MongoLoader(os.getenv("MONGO_URI", "mongodb://admin:israelyarbloom@localhost:27017/?authSource=admin"))
-        self.es = ElasticSearchClient(os.getenv("ELS_URI", "http://localhost:9200"), "gate_keeper", mapping=self.get_map())
+        self.logger = logger
+        self.mongo = MongoLoader(logger, os.getenv("MONGO_URI", "mongodb://admin:israelyarbloom@localhost:27017/?authSource=admin"))
+        self.es = ElasticSearchClient(logger, os.getenv("ELS_URI", "http://localhost:9200"), "gate_keeper", mapping=self.get_map())
         self.play_program()
 
 
@@ -50,19 +52,17 @@ class ElasticLoader:
     
     def play_program(self):
         self.__class__._initialized = True
-        print("\n\n\n🌞 End-user service START!! 🌞\n\n\n")
+        self.logger.publish_info_log("****🌞 End-user service START!! 🌞****")
         time.sleep(5)
         
         counter = 0
         for doc in self.mongo.get_all_docs("gatekeeper_db", "gatekeeper_coll"):
             counter += 1
-            print(f"\n\n****Received from MongoDB a new DOC --number {counter}--****")
-            print(f"DOC: \n{doc}\n")
+            self.logger.publish_info_log(f"Received from 'MongoDB' a new DOC. \n**Number {counter}**\nRecived doc: \n{doc}")
             es_doc = self.transform(doc)
-            response = self.es.index_doc(es_doc["message_id"], es_doc)
-            print("\n🆕 ES index 'gate_keeper' is receive a new document.")
-            print(f"Document-status in ES: \n'{response['result']}'\n"+"*"*75+"\n")
+            self.es.index_doc(es_doc["message_id"], es_doc)
+            self.logger.publish_info_log(f"🆕 Indexed a doc to 'gate_keeper' ES-index \n**Number {counter}")
             time.sleep(1)
 
         time.sleep(5)
-        print("\n\n\n🥱 End-user service FINSHED!! 🥱\n\n\n")
+        self.logger.publish_info_log("****🥱 'End-user' service FINSHED!! 🥱****")
