@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: data-analyzer
+  labels:
+    app: data-analyzer
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-analyzer
+  template:
+    metadata:
+      labels:
+        app: data-analyzer
+    spec:
+      containers:
+        - name: data-analyzer
+          image: israelyarbloom/data_analyzer:latest
+          ports:
+            - containerPort: 9000
+          env:
+            - name: KAFKA_URI
+              value: "kafka-svc:9092"
+
+            - name: MYSQL_HOST
+              value: "mysql-svc"
+            - name: MYSQL_DATABASE
+              value: "identities"
+            - name: MYSQL_USER
+              value: "app_user"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dbs-secret
+                  key: MYSQL_PASSWORD
+
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: dbs-secret
+                  key: MONGO_URI

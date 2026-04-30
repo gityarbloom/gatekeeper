@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: data-loader
+  labels:
+    app: data-loader
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-loader
+  template:
+    metadata:
+      labels:
+        app: data-loader
+    spec:
+      containers:
+        - name: data-loader
+          image: israelyarbloom/data_loader:latest
+          ports:
+            - containerPort: 8200
+          env:
+            - name: KAFKA_URI
+              value: "kafka:9092"
+            - name: GPS_PATH
+              value: "/app/data_loader/data/gps_stream.json"
+            - name: INTERCEPTS_PATH
+              value: "/app/data_loader/data/intercepts.json"
+            - name: IDENTITIES_PATH
+              value: "/app/data_loader/data/identities.csv"
+            - name: MYSQL_HOST
+              value: "mysql"
+            - name: MYSQL_DATABASE
+              value: "identities"
+            - name: MYSQL_USER
+              value: "app_user"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dbs-secret
+                  key: MYSQL_PASSWORD

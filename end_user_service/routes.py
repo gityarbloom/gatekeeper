@@ -1,4 +1,4 @@
-from elastic_loader import ElasticLoader
+from service_manager import ServiceManager
 from logs_producer import LogsProducer
 from fastapi import APIRouter
 import os
@@ -9,7 +9,7 @@ logger = LogsProducer(prod_config)
 
 
 
-es_loader = ElasticLoader(logger)
+es_loader = ServiceManager(logger)
 router = APIRouter()
 
 

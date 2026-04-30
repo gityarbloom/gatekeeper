@@ -1,7 +1,7 @@
+from pymongo.errors import PyMongoError
 from pymongo import MongoClient
-from pymongo.errors import BulkWriteError, PyMongoError
-from bson import ObjectId
 import time
+
 
 
 class MongoLoader:
@@ -26,15 +26,14 @@ class MongoLoader:
                     raise
 
 
-    
-    def insert(self, doc_num, db:str, coll:str, doc:dict):
+    def insert(self, doc_num:int, id_column:str, db:str, coll:str, doc:dict):
         loader = self.client_conn[db][coll]
         try:
             result = loader.update_one(
-                {"suspect_id": doc["suspect_id"]},
-                {"$setOnInsert": doc}
-                ,upsert=True
+                {id_column: doc[id_column]},
+                {"$setOnInsert": doc},
+                upsert=True
                 )
-            self.logger.publish_info_log(f"Insert doc \n**Number {doc_num}** \nto MongoDB\nInserted id: {result.upserted_id}")
+            self.logger.publish_info_log(f"Insert doc \n**Number {doc_num}** \nto 'MongoDB' collection '{coll}'\nInserted id: {result.upserted_id}")
         except PyMongoError as e:
             self.logger.publish_err_log(f"'MongoDB' error: \n{e}")

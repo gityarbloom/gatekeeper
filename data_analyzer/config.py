@@ -15,5 +15,5 @@ class AnalyzerConfig:
             'group.id': 'gatekeeper',
             'auto.offset.reset': 'earliest'
             }
-        self.prod = {'bootstrap.servers': os.getenv("KAFKA_URI")}
         self.mongo = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
+        self.prod = {'bootstrap.servers': os.getenv("KAFKA_URI")}

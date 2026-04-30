@@ -3,7 +3,7 @@ import re
 
 
 
-class TextEditor:       
+class TextPreparer:       
 
     @staticmethod
     def clean_html(row_text:str):

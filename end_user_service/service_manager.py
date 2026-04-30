@@ -1,12 +1,11 @@
-from moduls import ElasticSearchClient
-from moduls import MongoLoader
+from end_user_modules import ElasticSearchClient, MongoLoader
 import time
 import os
 
 
 
 
-class ElasticLoader:
+class ServiceManager:
     time.sleep(60)
     _program_running = None
     _initialized = False

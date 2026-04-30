@@ -89,23 +89,19 @@ services:
 
 
   data_loader:
-    build: data_loader/
+    build: ./data_loader
     container_name: data_loader
     ports:
       - "9900:9900"
     environment:
-      KAFKA_URI: kafka:9092
       GPS_PATH: ./data/gps_stream.json
       INTERCEPTS_PATH: ./data/intercepts.json
       IDENTITIES_PATH: ./data/identities.csv
+      KAFKA_URI: kafka:9092
       MYSQL_HOST: mysql
       MYSQL_DATABASE: identities
       MYSQL_USER: app_user
       MYSQL_PASSWORD: israelyarbloom
-    volumes:
-      - ./data/gps_stream.json:/app/data_loader/data/gps_stream.json
-      - ./data/intercepts.json:/app/data_loader/data/intercepts.json
-      - ./data/identities.csv:/app/data_loader/data/identities.csv
     depends_on:
       kafka:
         condition: service_healthy
@@ -145,8 +141,11 @@ services:
 
   logger:
     build: logger/
+    ports:
+      - "9990:9990"
     environment:
       KAFKA_URI: kafka:9092
+      MONGO_URI: mongodb://admin:israelyarbloom@mongo:27017/?authSource=admin
     depends_on:
       - data_loader
       - data_analyzer

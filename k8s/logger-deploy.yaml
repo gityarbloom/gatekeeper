@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: logger
+  labels:
+    app: logger
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logger
+  template:
+    metadata:
+      labels:
+        app: logger
+    spec:
+      containers:
+        - name: logger
+          image: israelyarbloom/logger:latest
+          ports:
+            - containerPort: 9990
+          env:
+            - name: KAFKA_URI
+              value: kafka-svc:9092

@@ -4,6 +4,7 @@ import time
 
 
 class MySqlConnection:
+
     def __init__(self, logger, password, host, db_name, user):
         self.logger = logger
         self.conn = self.init_db_connection(password, host, db_name, user)

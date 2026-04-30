@@ -3,7 +3,7 @@ import json
 
 
 
-class KafkaProducer:
+class KafkaLoader:
     def __init__(self, logger, config):
         self.logger = logger
         for retry in range(5):

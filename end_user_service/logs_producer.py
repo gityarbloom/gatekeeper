@@ -42,7 +42,7 @@ class LogsProducer:
             raise
 
 
-    def publish_error_log(self, err_log):
+    def publish_err_log(self, err_log):
         timestamp = datetime.now().strftime("%d/%m/%Y--%H:%M:%S")
         log = f"{self.c_name} \n❌ 'ERROR'\n⌚ {timestamp}\n{err_log}"
         try:
